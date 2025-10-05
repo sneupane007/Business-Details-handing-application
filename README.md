@@ -1,11 +1,11 @@
 # Business Handling Flutter Application
 
-## Overview
+### Overview
 This Flutter application aims to simplify the legal and administrative aspects of managing a business. By providing users with a platform to upload, view, and manage critical legal documents like MOUs, shareholder certificates, and business objectives, the app seeks to make the process of establishing and running businesses more accessible. The project is inspired by my experience working at a business consulting firm in Nepal, where I gained valuable insights into the legal requirements of business management.
 
-## Features
+### Features
 
-### Current Functionality
+#### Current Functionality
 - **Login Page**
   - User authentication through a simple login interface.
   - Secure password field.
