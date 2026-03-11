@@ -1,0 +1,530 @@
+{
+  "users": [
+    {
+      "id": "user-001",
+      "email": "ram.sharma@example.com",
+      "display_name": "Ram Sharma",
+      "avatar_url": null,
+      "phone": "+977-9841234567",
+      "created_at": "2022-01-15T10:00:00Z",
+      "professional_profile": {
+        "title": "Managing Director & Co-Founder",
+        "executive_summary": "20+ years in Nepalese financial services. Previously VP at NIC Asia Bank, oversaw a $50M retail lending portfolio. Co-founded two ventures before Avalokan, one of which was acquired in 2019.",
+        "education": [
+          {
+            "degree": "MBA, Finance",
+            "institution": "Tribhuvan University",
+            "year": 2004
+          },
+          {
+            "degree": "BBA",
+            "institution": "Pokhara University",
+            "year": 2001
+          }
+        ],
+        "certifications": [
+          { "name": "Chartered Financial Analyst (CFA) Level II", "year": 2008 },
+          { "name": "SEBON Licensed Investment Advisor", "year": 2010 }
+        ],
+        "track_record": [
+          {
+            "type": "exit",
+            "description": "Co-founded FinPro Pvt Ltd; acquired by Himalayan Capital in 2019",
+            "value_usd": 1200000,
+            "year": 2019
+          },
+          {
+            "type": "budget_managed",
+            "description": "Managed NIC Asia retail lending portfolio",
+            "value_usd": 50000000,
+            "years": "2012–2018"
+          }
+        ],
+        "influence": {
+          "testimonials": [
+            {
+              "author": "Suresh Acharya, CEO — Himalayan Capital",
+              "text": "Ram's diligence and financial acumen are exceptional. He transformed our due-diligence process."
+            }
+          ],
+          "press_mentions": [
+            {
+              "outlet": "Kathmandu Post",
+              "headline": "FinPro acquisition signals maturing startup ecosystem",
+              "date": "2019-04-12"
+            }
+          ],
+          "thought_leadership": [
+            {
+              "type": "article",
+              "title": "Corporate Governance in Nepali SMEs",
+              "publication": "Nepal Economic Forum",
+              "year": 2021
+            }
+          ],
+          "board_memberships": [
+            {
+              "org": "Nepal Venture Capital Association",
+              "role": "Advisory Board Member",
+              "since": 2020
+            }
+          ]
+        },
+        "legal_financial_standing": {
+          "background_check_status": "clean",
+          "background_check_date": "2023-06-01",
+          "conflict_of_interest_disclosures": []
+        }
+      },
+      "portfolios": ["portfolio-001", "portfolio-002"]
+    }
+  ],
+
+  "businesses": [
+    {
+      "id": "biz-001",
+      "portfolio_id": "portfolio-001",
+      "core_identity": {
+        "legal_name": "GreenHarvest Agro Pvt. Ltd.",
+        "trade_name": "GreenHarvest",
+        "legal_structure": "Private Limited Company",
+        "registration_number": "PAN-302-048-049",
+        "registered_jurisdiction": "Kathmandu, Nepal",
+        "registration_date": "2019-08-15",
+        "fiscal_year_end": "Ashadh 32 (mid-July)",
+        "industry": "Agri-tech / Food Processing",
+        "stage": "Growth",
+        "mission": "Reduce post-harvest food loss in Nepal by connecting smallholder farmers with cold-chain logistics and urban distributors.",
+        "vision": "A Nepal where no farmer loses income to spoilage.",
+        "problem_solved": "60% of perishable produce in hilly regions is lost before reaching market due to lack of cold storage and last-mile logistics.",
+        "website": "https://greenharvest.com.np",
+        "social_media": {
+          "linkedin": "https://linkedin.com/company/greenharvest-np",
+          "facebook": "https://facebook.com/greenharvestnp"
+        }
+      },
+      "market_dynamics": {
+        "target_demographics": {
+          "primary_customer": "Mid-size urban grocery chains & hotel procurement managers in Kathmandu Valley",
+          "secondary_customer": "Smallholder vegetable farmers in Kaski, Palpa, and Dhading districts",
+          "customer_pain_points": [
+            "Unreliable supply chain for seasonal produce",
+            "No cold-chain visibility",
+            "Price volatility due to middlemen"
+          ],
+          "buying_triggers": [
+            "Price consistency",
+            "Guaranteed freshness SLA",
+            "Bulk order flexibility"
+          ]
+        },
+        "competitive_landscape": {
+          "top_competitors": [
+            {
+              "name": "FreshMart Nepal",
+              "strength": "Established distribution network in Kathmandu",
+              "weakness": "No cold-chain; relies on traditional transport"
+            },
+            {
+              "name": "AgriHub Pvt. Ltd.",
+              "strength": "Strong farmer relationships in Terai",
+              "weakness": "Urban retail penetration is weak"
+            },
+            {
+              "name": "Hamro Krishi",
+              "strength": "Tech-forward mobile app for farmers",
+              "weakness": "No physical logistics infrastructure"
+            }
+          ],
+          "unfair_advantage": "Proprietary IoT-enabled cold containers leased to district cooperatives, creating data-driven traceability no competitor offers."
+        },
+        "market_size": {
+          "tam_usd": 480000000,
+          "sam_usd": 45000000,
+          "som_usd": 4500000,
+          "current_market_share_pct": 2.1,
+          "growth_rate_yoy_pct": 22
+        }
+      },
+      "operations": {
+        "tech_stack": [
+          { "category": "IoT Sensors", "tool": "Custom ESP32 cold-chain monitors" },
+          { "category": "Backend", "tool": "Node.js + PostgreSQL on AWS Lightsail" },
+          { "category": "Mobile App", "tool": "Flutter (Android)" },
+          { "category": "ERP", "tool": "Tally Prime (accounting)" },
+          { "category": "Communication", "tool": "Slack + WhatsApp Business" }
+        ],
+        "org_chart": {
+          "ceo": {
+            "name": "Ram Sharma",
+            "reports_to": "Board of Directors",
+            "direct_reports": ["COO", "CFO", "CTO"]
+          },
+          "departments": [
+            { "name": "Logistics & Supply Chain", "head": "Sita Rai", "headcount": 12 },
+            { "name": "Technology", "head": "Bikram Thapa", "headcount": 5 },
+            { "name": "Finance & Compliance", "head": "Anita KC", "headcount": 3 },
+            { "name": "Sales & Business Development", "head": "Roshan Gurung", "headcount": 8 }
+          ],
+          "total_headcount": 28
+        },
+        "key_partnerships": [
+          { "partner": "Kaski District Cooperative", "type": "Farmer aggregation", "since": 2020 },
+          { "partner": "Ncell", "type": "IoT SIM connectivity", "since": 2021 }
+        ],
+        "documents": [
+          {
+            "type": "MOU",
+            "with": "Kaski Cooperative",
+            "signed_date": "2020-03-10",
+            "expiry_date": "2025-03-09",
+            "url": null
+          },
+          {
+            "type": "Shareholder Agreement",
+            "version": "v2",
+            "signed_date": "2022-11-01",
+            "url": null
+          }
+        ]
+      },
+      "financials": {
+        "revenue_streams": [
+          { "stream": "Cold-chain logistics fee", "model": "Per-kg transport fee", "pct_of_revenue": 55 },
+          { "stream": "Cold container leasing", "model": "Monthly lease to cooperatives", "pct_of_revenue": 30 },
+          { "stream": "Data & traceability SaaS", "model": "Annual subscription (hotels/chains)", "pct_of_revenue": 15 }
+        ],
+        "profit_and_loss": [
+          {
+            "fiscal_year": "FY2022",
+            "revenue_npr": 18500000,
+            "cogs_npr": 11200000,
+            "gross_profit_npr": 7300000,
+            "operating_expenses_npr": 5800000,
+            "ebitda_npr": 1500000,
+            "net_profit_npr": 800000
+          },
+          {
+            "fiscal_year": "FY2023",
+            "revenue_npr": 26400000,
+            "cogs_npr": 15600000,
+            "gross_profit_npr": 10800000,
+            "operating_expenses_npr": 7200000,
+            "ebitda_npr": 3600000,
+            "net_profit_npr": 2100000
+          },
+          {
+            "fiscal_year": "FY2024",
+            "revenue_npr": 38700000,
+            "cogs_npr": 21900000,
+            "gross_profit_npr": 16800000,
+            "operating_expenses_npr": 9100000,
+            "ebitda_npr": 7700000,
+            "net_profit_npr": 5400000
+          }
+        ],
+        "balance_sheet_latest": {
+          "as_of": "FY2024",
+          "total_assets_npr": 52000000,
+          "total_liabilities_npr": 18000000,
+          "shareholders_equity_npr": 34000000,
+          "cash_and_equivalents_npr": 8200000,
+          "total_debt_npr": 12000000
+        },
+        "cash_flow_summary": [
+          { "fiscal_year": "FY2022", "operating_npr": 1200000, "investing_npr": -4500000, "financing_npr": 3800000 },
+          { "fiscal_year": "FY2023", "operating_npr": 3100000, "investing_npr": -2800000, "financing_npr": -500000 },
+          { "fiscal_year": "FY2024", "operating_npr": 6800000, "investing_npr": -3200000, "financing_npr": -1100000 }
+        ],
+        "funding_history": [
+          {
+            "round": "Seed",
+            "amount_usd": 80000,
+            "date": "2019-09-01",
+            "investors": ["Ram Sharma (self)", "Angel - Suresh Acharya"]
+          },
+          {
+            "round": "Series A",
+            "amount_usd": 350000,
+            "date": "2022-05-15",
+            "investors": ["Himalayan Impact Fund"]
+          }
+        ]
+      },
+      "shareholding": [
+        {
+          "shareholder_id": "user-001",
+          "name": "Ram Sharma",
+          "shares": 45000,
+          "share_class": "Ordinary",
+          "ownership_pct": 45.0,
+          "acquisition_date": "2019-08-15"
+        },
+        {
+          "shareholder_id": "ext-001",
+          "name": "Suresh Acharya",
+          "shares": 15000,
+          "share_class": "Ordinary",
+          "ownership_pct": 15.0,
+          "acquisition_date": "2019-09-01"
+        },
+        {
+          "shareholder_id": "ext-002",
+          "name": "Himalayan Impact Fund",
+          "shares": 25000,
+          "share_class": "Preferred-A",
+          "ownership_pct": 25.0,
+          "acquisition_date": "2022-05-15"
+        },
+        {
+          "shareholder_id": "ext-003",
+          "name": "ESOP Pool",
+          "shares": 15000,
+          "share_class": "ESOP",
+          "ownership_pct": 15.0,
+          "acquisition_date": null
+        }
+      ]
+    },
+
+    {
+      "id": "biz-002",
+      "portfolio_id": "portfolio-002",
+      "core_identity": {
+        "legal_name": "TechBridge Solutions Pvt. Ltd.",
+        "trade_name": "TechBridge",
+        "legal_structure": "Private Limited Company",
+        "registration_number": "PAN-415-076-077",
+        "registered_jurisdiction": "Lalitpur, Nepal",
+        "registration_date": "2021-03-22",
+        "fiscal_year_end": "Ashadh 32 (mid-July)",
+        "industry": "SaaS / HR Technology",
+        "stage": "Early",
+        "mission": "Digitize HR and payroll for Nepal's 500,000+ SMEs currently running on paper.",
+        "vision": "Every Nepali business owner has enterprise-grade HR tools at micro-enterprise cost.",
+        "problem_solved": "98% of Nepali SMEs manage attendance, leave, and payroll manually — causing compliance failures and audit risk.",
+        "brand_guidelines": {
+          "primary_color": "#1565C0",
+          "secondary_color": "#E65100",
+          "voice": "Confident, Modern, Accessible",
+          "tagline": "HR Made Simple.",
+          "logo_url": null
+        },
+        "website": "https://techbridge.com.np",
+        "social_media": {
+          "linkedin": "https://linkedin.com/company/techbridge-np"
+        }
+      },
+      "market_dynamics": {
+        "target_demographics": {
+          "primary_customer": "SME owners (5–100 employees) in trade, retail, and services sectors",
+          "secondary_customer": "Chartered Accountants and HR consultancies managing multiple client payrolls",
+          "customer_pain_points": [
+            "Manual payroll takes 3–5 days each month",
+            "Incorrect PF/CIT calculations leading to IRD penalties",
+            "No digital leave trail for dispute resolution"
+          ],
+          "buying_triggers": [
+            "IRD compliance pressure",
+            "Staff complaints about pay slips",
+            "Owner scaling beyond 10 employees"
+          ]
+        },
+        "competitive_landscape": {
+          "top_competitors": [
+            {
+              "name": "SwiftHR",
+              "strength": "First mover, 3-year head start",
+              "weakness": "Outdated UI, no mobile app"
+            },
+            {
+              "name": "Excel + Manual",
+              "strength": "Zero cost, familiar",
+              "weakness": "No audit trail, error prone"
+            },
+            {
+              "name": "Tally HR module",
+              "strength": "Integrated with Tally ERP",
+              "weakness": "Complex setup, expensive for micro-SMEs"
+            }
+          ],
+          "unfair_advantage": "Nepali-first: built for Nepal's PF, CIT, SSF regulations out-of-the-box with auto-updated compliance rules. No competitor auto-updates regulatory tables."
+        },
+        "market_size": {
+          "tam_usd": 120000000,
+          "sam_usd": 22000000,
+          "som_usd": 1100000,
+          "current_market_share_pct": 0.4,
+          "growth_rate_yoy_pct": 65
+        }
+      },
+      "operations": {
+        "tech_stack": [
+          { "category": "Frontend", "tool": "React + TypeScript" },
+          { "category": "Mobile", "tool": "Flutter" },
+          { "category": "Backend", "tool": "Django REST Framework + PostgreSQL" },
+          { "category": "Hosting", "tool": "Hetzner VPS + Caddy" },
+          { "category": "Auth", "tool": "Supabase Auth" },
+          { "category": "Payments", "tool": "Khalti + eSewa integration" }
+        ],
+        "org_chart": {
+          "ceo": {
+            "name": "Priya Manandhar",
+            "reports_to": "Board",
+            "direct_reports": ["CTO", "Head of Sales"]
+          },
+          "departments": [
+            { "name": "Engineering", "head": "Anil Shrestha", "headcount": 6 },
+            { "name": "Sales & CS", "head": "Deepa Tamang", "headcount": 4 },
+            { "name": "Finance", "head": "Part-time CFO", "headcount": 1 }
+          ],
+          "total_headcount": 11
+        },
+        "key_partnerships": [
+          {
+            "partner": "FNCCI (Federation of Nepali Chambers)",
+            "type": "SME outreach & endorsement",
+            "since": 2022
+          }
+        ],
+        "documents": [
+          {
+            "type": "MOU",
+            "with": "FNCCI",
+            "signed_date": "2022-07-01",
+            "expiry_date": "2024-06-30",
+            "url": null
+          }
+        ]
+      },
+      "financials": {
+        "revenue_streams": [
+          {
+            "stream": "SaaS subscription",
+            "model": "Per-employee per-month (NPR 150/emp/month)",
+            "pct_of_revenue": 80
+          },
+          {
+            "stream": "Implementation & onboarding",
+            "model": "One-time fee per client",
+            "pct_of_revenue": 12
+          },
+          {
+            "stream": "Compliance advisory add-on",
+            "model": "Annual retainer",
+            "pct_of_revenue": 8
+          }
+        ],
+        "profit_and_loss": [
+          {
+            "fiscal_year": "FY2022",
+            "revenue_npr": 1800000,
+            "cogs_npr": 900000,
+            "gross_profit_npr": 900000,
+            "operating_expenses_npr": 2100000,
+            "ebitda_npr": -1200000,
+            "net_profit_npr": -1250000
+          },
+          {
+            "fiscal_year": "FY2023",
+            "revenue_npr": 5200000,
+            "cogs_npr": 1900000,
+            "gross_profit_npr": 3300000,
+            "operating_expenses_npr": 3800000,
+            "ebitda_npr": -500000,
+            "net_profit_npr": -620000
+          },
+          {
+            "fiscal_year": "FY2024",
+            "revenue_npr": 11400000,
+            "cogs_npr": 3800000,
+            "gross_profit_npr": 7600000,
+            "operating_expenses_npr": 5900000,
+            "ebitda_npr": 1700000,
+            "net_profit_npr": 1100000
+          }
+        ],
+        "balance_sheet_latest": {
+          "as_of": "FY2024",
+          "total_assets_npr": 14500000,
+          "total_liabilities_npr": 6200000,
+          "shareholders_equity_npr": 8300000,
+          "cash_and_equivalents_npr": 3100000,
+          "total_debt_npr": 4000000
+        },
+        "cash_flow_summary": [
+          { "fiscal_year": "FY2022", "operating_npr": -1100000, "investing_npr": -800000, "financing_npr": 3200000 },
+          { "fiscal_year": "FY2023", "operating_npr": -400000, "investing_npr": -600000, "financing_npr": 500000 },
+          { "fiscal_year": "FY2024", "operating_npr": 1800000, "investing_npr": -900000, "financing_npr": -200000 }
+        ],
+        "funding_history": [
+          {
+            "round": "Pre-Seed",
+            "amount_usd": 30000,
+            "date": "2021-04-01",
+            "investors": ["Ram Sharma", "Priya Manandhar (self)"]
+          },
+          {
+            "round": "Seed",
+            "amount_usd": 120000,
+            "date": "2023-01-10",
+            "investors": ["Ram Sharma", "InfoDev Nepal Fund"]
+          }
+        ]
+      },
+      "shareholding": [
+        {
+          "shareholder_id": "user-001",
+          "name": "Ram Sharma",
+          "shares": 20000,
+          "share_class": "Ordinary",
+          "ownership_pct": 20.0,
+          "acquisition_date": "2021-04-01"
+        },
+        {
+          "shareholder_id": "ext-004",
+          "name": "Priya Manandhar",
+          "shares": 45000,
+          "share_class": "Ordinary",
+          "ownership_pct": 45.0,
+          "acquisition_date": "2021-03-22"
+        },
+        {
+          "shareholder_id": "ext-005",
+          "name": "InfoDev Nepal Fund",
+          "shares": 25000,
+          "share_class": "Preferred-A",
+          "ownership_pct": 25.0,
+          "acquisition_date": "2023-01-10"
+        },
+        {
+          "shareholder_id": "ext-006",
+          "name": "ESOP Pool",
+          "shares": 10000,
+          "share_class": "ESOP",
+          "ownership_pct": 10.0,
+          "acquisition_date": null
+        }
+      ]
+    }
+  ],
+
+  "portfolios": [
+    {
+      "id": "portfolio-001",
+      "owner_id": "user-001",
+      "name": "Core Investments",
+      "description": "Primary operating businesses with majority influence",
+      "business_ids": ["biz-001"],
+      "created_at": "2019-08-15T00:00:00Z"
+    },
+    {
+      "id": "portfolio-002",
+      "owner_id": "user-001",
+      "name": "Tech Ventures",
+      "description": "Early-stage technology bets as angel/seed investor",
+      "business_ids": ["biz-002"],
+      "created_at": "2021-04-01T00:00:00Z"
+    }
+  ]
+}

@@ -1,19 +1,19 @@
 import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter/material.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
-import 'package:avalokan/pages/signup_page.dart';
 import 'package:avalokan/widgets/google_sign_in_button.dart';
 
-class LoginPage extends StatefulWidget {
-  const LoginPage({super.key});
+class SignupPage extends StatefulWidget {
+  const SignupPage({super.key});
 
   @override
-  State<LoginPage> createState() => _LoginPageState();
+  State<SignupPage> createState() => _SignupPageState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _SignupPageState extends State<SignupPage> {
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
+  final _confirmPasswordController = TextEditingController();
   final _supabase = Supabase.instance.client;
 
   bool _isLoading = false;
@@ -24,15 +24,25 @@ class _LoginPageState extends State<LoginPage> {
   void dispose() {
     _emailController.dispose();
     _passwordController.dispose();
+    _confirmPasswordController.dispose();
     super.dispose();
   }
 
-  Future<void> _handleLogin() async {
+  Future<void> _handleSignup() async {
     final email = _emailController.text.trim();
     final password = _passwordController.text;
+    final confirm = _confirmPasswordController.text;
 
-    if (email.isEmpty || password.isEmpty) {
-      setState(() => _errorMessage = 'Email and password are required.');
+    if (email.isEmpty || password.isEmpty || confirm.isEmpty) {
+      setState(() => _errorMessage = 'All fields are required.');
+      return;
+    }
+    if (password != confirm) {
+      setState(() => _errorMessage = 'Passwords do not match.');
+      return;
+    }
+    if (password.length < 6) {
+      setState(() => _errorMessage = 'Password must be at least 6 characters.');
       return;
     }
 
@@ -42,10 +52,19 @@ class _LoginPageState extends State<LoginPage> {
     });
 
     try {
-      await _supabase.auth.signInWithPassword(email: email, password: password);
-      // Explicit navigation — don't rely solely on AuthGate StreamBuilder
-      if (mounted) {
+      final response = await _supabase.auth.signUp(
+        email: email,
+        password: password,
+      );
+
+      if (!mounted) return;
+
+      if (response.session != null) {
+        // Email confirmation disabled — signed in immediately, go to home
         Navigator.of(context).pushNamedAndRemoveUntil('/', (route) => false);
+      } else {
+        // Email confirmation required (Supabase Cloud default)
+        _showConfirmationDialog(email);
       }
     } on AuthException catch (e) {
       if (mounted) setState(() => _errorMessage = e.message);
@@ -56,7 +75,7 @@ class _LoginPageState extends State<LoginPage> {
     }
   }
 
-  Future<void> _handleGoogleLogin() async {
+  Future<void> _handleGoogleSignup() async {
     setState(() {
       _isGoogleLoading = true;
       _errorMessage = null;
@@ -67,8 +86,6 @@ class _LoginPageState extends State<LoginPage> {
         OAuthProvider.google,
         redirectTo: kIsWeb ? null : 'io.supabase.avalokan://login-callback',
       );
-      // On web this redirects the page — AuthGate StreamBuilder handles
-      // the session when the app reloads after the OAuth callback.
     } on AuthException catch (e) {
       if (mounted) setState(() => _errorMessage = e.message);
     } catch (_) {
@@ -78,12 +95,37 @@ class _LoginPageState extends State<LoginPage> {
     }
   }
 
+  void _showConfirmationDialog(String email) {
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (dialogContext) => AlertDialog(
+        title: const Text('Verify your email'),
+        content: Text(
+          'A confirmation link has been sent to $email.\n\n'
+          'Please check your inbox and click the link to activate your account.',
+        ),
+        actions: [
+          TextButton(
+            onPressed: () {
+              // Use rootNavigator to reliably close dialog first,
+              // then pop the signup page back to login.
+              Navigator.of(dialogContext, rootNavigator: true).pop();
+              if (mounted) Navigator.of(context).pop();
+            },
+            child: const Text('Go to Login'),
+          ),
+        ],
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: const Color(0xFF6BABE6),
-        title: const Text('Sign In'),
+        title: const Text('Create Account'),
         foregroundColor: Colors.white,
       ),
       body: SingleChildScrollView(
@@ -93,23 +135,23 @@ class _LoginPageState extends State<LoginPage> {
           children: [
             const SizedBox(height: 24),
             const Text(
-              'Welcome back',
+              'Join Avalokan',
               textAlign: TextAlign.center,
               style: TextStyle(fontSize: 26, fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 8),
             const Text(
-              'Sign in to your Avalokan account',
+              'Create your account to get started',
               textAlign: TextAlign.center,
               style: TextStyle(color: Colors.black54),
             ),
             const SizedBox(height: 32),
             GoogleSignInButton(
               isLoading: _isGoogleLoading,
-              onPressed: _handleGoogleLogin,
+              onPressed: _handleGoogleSignup,
             ),
             const SizedBox(height: 20),
-            const _OrDivider(label: 'or sign in with email'),
+            const _OrDivider(label: 'or sign up with email'),
             const SizedBox(height: 20),
             TextField(
               controller: _emailController,
@@ -126,14 +168,26 @@ class _LoginPageState extends State<LoginPage> {
             TextField(
               controller: _passwordController,
               obscureText: true,
-              textInputAction: TextInputAction.done,
+              textInputAction: TextInputAction.next,
               decoration: InputDecoration(
                 labelText: 'Password',
                 prefixIcon: const Icon(Icons.lock_outline),
                 border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(12)),
               ),
-              onSubmitted: (_) => _handleLogin(),
+            ),
+            const SizedBox(height: 16),
+            TextField(
+              controller: _confirmPasswordController,
+              obscureText: true,
+              textInputAction: TextInputAction.done,
+              decoration: InputDecoration(
+                labelText: 'Confirm Password',
+                prefixIcon: const Icon(Icons.lock_outline),
+                border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(12)),
+              ),
+              onSubmitted: (_) => _handleSignup(),
             ),
             if (_errorMessage != null) ...[
               const SizedBox(height: 12),
@@ -147,14 +201,14 @@ class _LoginPageState extends State<LoginPage> {
               child: _isLoading
                   ? const Center(child: CircularProgressIndicator())
                   : ElevatedButton(
-                      onPressed: _handleLogin,
+                      onPressed: _handleSignup,
                       style: ElevatedButton.styleFrom(
                         backgroundColor: const Color(0xFFAB4545),
                         foregroundColor: Colors.white,
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(12)),
                       ),
-                      child: const Text('Sign In',
+                      child: const Text('Create Account',
                           style: TextStyle(fontSize: 16)),
                     ),
             ),
@@ -162,14 +216,11 @@ class _LoginPageState extends State<LoginPage> {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const Text("Don't have an account? "),
+                const Text('Already have an account? '),
                 GestureDetector(
-                  onTap: () => Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (_) => const SignupPage()),
-                  ),
+                  onTap: () => Navigator.pop(context),
                   child: const Text(
-                    'Sign Up',
+                    'Sign In',
                     style: TextStyle(
                       color: Color(0xFFAB4545),
                       fontWeight: FontWeight.w600,

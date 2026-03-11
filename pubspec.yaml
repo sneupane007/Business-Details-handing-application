@@ -1,5 +1,5 @@
-name: flutter_application_1
-description: "A new Flutter project."
+name: avalokan
+description: "Avalokan investor intelligence platform."
 # The following line prevents the package from being accidentally published to
 # pub.dev using `flutter pub publish`. This is preferred for private packages.
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
@@ -31,9 +31,9 @@ dependencies:
   flutter:
     sdk: flutter
 
-  # The following adds the Cupertino Icons font to your application.
-  # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.8
+  supabase_flutter: ^2.8.4
+  flutter_riverpod: ^2.6.1
 
 dev_dependencies:
   flutter_test:
@@ -56,6 +56,9 @@ flutter:
   # included with your application, so that you can use the icons in
   # the material Icons class.
   uses-material-design: true
+
+  assets:
+    - assets/sample_data.json
 
   # To add assets to your application, add an assets section, like this:
   # assets:

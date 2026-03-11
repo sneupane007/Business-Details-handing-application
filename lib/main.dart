@@ -1,83 +1,160 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/pages/profile_page.dart'; // Import the ProfilePage
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
+import 'package:avalokan/config/env.dart';
+import 'package:avalokan/pages/login_page.dart';
+import 'package:avalokan/pages/profile_page.dart';
+import 'package:avalokan/pages/dashboard_page.dart';
+import 'package:avalokan/pages/notifications_page.dart';
+import 'package:avalokan/providers/data_provider.dart';
 
-void main() {
-  runApp(const MyApp());
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  String? initError;
+  try {
+    await Supabase.initialize(
+      url: Env.supabaseUrl,
+      anonKey: Env.supabaseAnonKey,
+    );
+  } catch (e) {
+    initError = e.toString();
+  }
+
+  runApp(ProviderScope(child: MyApp(initError: initError)));
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  final String? initError;
+  const MyApp({super.key, this.initError});
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Register Your Company',
-      home: RYC(),
+      title: 'Avalokan',
+      theme: ThemeData(
+        colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xFFAB4545)),
+        useMaterial3: true,
+      ),
+      home: initError != null
+          ? Scaffold(
+              body: Center(
+                child: Padding(
+                  padding: const EdgeInsets.all(24),
+                  child: Text(
+                    'Startup error:\n$initError',
+                    textAlign: TextAlign.center,
+                    style: const TextStyle(color: Colors.red),
+                  ),
+                ),
+              ),
+            )
+          : const AuthGate(),
     );
   }
 }
 
-class CustomHeader extends StatelessWidget implements PreferredSizeWidget {
-  const CustomHeader({super.key});
-
-  @override
-  Size get preferredSize => Size.fromHeight(60);
+/// Listens to Supabase auth state changes so Google OAuth redirects
+/// automatically navigate without any manual handling.
+class AuthGate extends StatelessWidget {
+  const AuthGate({super.key});
 
   @override
   Widget build(BuildContext context) {
+    return StreamBuilder<AuthState>(
+      stream: Supabase.instance.client.auth.onAuthStateChange,
+      builder: (context, snapshot) {
+        final session = snapshot.data?.session ??
+            Supabase.instance.client.auth.currentSession;
+        if (session != null) return const RYC();
+        return const LoginPage();
+      },
+    );
+  }
+}
+
+class CustomHeader extends ConsumerWidget implements PreferredSizeWidget {
+  const CustomHeader({super.key});
+
+  @override
+  Size get preferredSize => const Size.fromHeight(60);
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final notifications = ref.watch(notificationsProvider);
+    final urgentCount = notifications.where((n) => n.isUrgent).length;
+
     return Container(
-      color: const Color.fromARGB(255, 171, 69, 69),
-      padding: EdgeInsets.symmetric(horizontal: 16),
+      color: const Color(0xFFAB4545),
+      padding: const EdgeInsets.symmetric(horizontal: 16),
       child: SafeArea(
         bottom: false,
         child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            // Left side: Circle avatar
             CircleAvatar(
               radius: 20,
               backgroundColor: Colors.blueGrey,
               child: IconButton(
-                icon: Icon(Icons.person, color: Colors.white),
+                icon: const Icon(Icons.person, color: Colors.white),
                 onPressed: () {
-                  // Navigate to ProfilePage
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => ProfilePage()),
+                    MaterialPageRoute(builder: (context) => const ProfilePage()),
                   );
                 },
               ),
             ),
-
-            // Center: Username/Shareholder + Company Name
-            Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  'Username / Shareholder',
+            const Expanded(
+              child: Center(
+                child: Text(
+                  'Avalokan',
                   style: TextStyle(
-                    color: Colors.black87,
-                    fontSize: 16,
-                    fontWeight: FontWeight.w600,
+                    color: Colors.white,
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                    letterSpacing: 1.2,
                   ),
                 ),
-                Text(
-                  'Company Name',
-                  style: TextStyle(
-                    color: Colors.black54,
-                    fontSize: 14,
-                  ),
-                ),
-              ],
+              ),
             ),
-
-            // Right side: Hamburger menu
-            IconButton(
-              icon: Icon(Icons.menu, color: Colors.black87),
-              onPressed: () {
-                // TODO: handle menu
-              },
+            Stack(
+              clipBehavior: Clip.none,
+              children: [
+                IconButton(
+                  icon: const Icon(Icons.notifications_outlined,
+                      color: Colors.white),
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const NotificationsPage()),
+                    );
+                  },
+                ),
+                if (urgentCount > 0)
+                  Positioned(
+                    right: 6,
+                    top: 6,
+                    child: Container(
+                      padding: const EdgeInsets.all(2),
+                      decoration: BoxDecoration(
+                        color: Colors.amber,
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                      constraints:
+                          const BoxConstraints(minWidth: 16, minHeight: 16),
+                      child: Text(
+                        '$urgentCount',
+                        style: const TextStyle(
+                          color: Colors.black,
+                          fontSize: 10,
+                          fontWeight: FontWeight.bold,
+                        ),
+                        textAlign: TextAlign.center,
+                      ),
+                    ),
+                  ),
+              ],
             ),
           ],
         ),
@@ -91,11 +168,9 @@ class RYC extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return const Scaffold(
       appBar: CustomHeader(),
-      body: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Center(child: Text('Body content here'))),
+      body: DashboardPage(),
     );
   }
 }
